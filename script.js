@@ -15,7 +15,6 @@ function createMap () {
 
     map = new google.maps.Map(document.getElementById('map'), options);
 
-
     // Adds a Places search box. Searching for a place will center the location.
     // map.controls[google.maps.ControlPosition.RIGHT_TOP].push(
     //     document.getElementById('bar'));
@@ -72,11 +71,87 @@ function createMap () {
     });
 
     directionsDisplay.setMap(map);
-    directionsDisplay.setPanel(document.getElementById('dierctionsPanel'));
+    directionsDisplay.setPanel(document.getElementById('directionsPanel'));
 
     google.maps.event.addListener(directionsDisplay, "directions_changed", function() {
-        
+
     });
+
+    // CREATE MAP BASED ON POINT A AND POINT B
+    // https://stackoverflow.com/a/32628396/9628569
+    // POINT A & POINT B
+
+    if (document.getElementById('pointA') != "" && document.getElementById('pointA') != "Set a starting point...") {
+        var pointA = document.getElementById('pointA'),
+            pointB = document.getElementById('pointB'),
+            options2 = {
+                zoom: 7,
+                center: pointA,
+            },
+
+        var searchBoxes = new google.maps.places.SearchBox(pointA, pointB);
+
+        map.addListener('bounds_changed', function() {
+                searchBoxes.setBounds(ma.getBounds(searchBoxes));
+        });
+
+            // Instantiate a directions service.
+            directionsService = new google.maps.DirectionsService,
+            directionsDisplay = new google.maps.DirectionsRenderer({
+                map: map
+            }),
+            markerA = new google.maps.Marker({
+                position: pointA,
+                title: "point A",
+                label: "A",
+                map: map
+            }),
+            markerB = new google.maps.Marker({
+                position: pointB,
+                title: "point B",
+                label: "B",
+                map: map
+            });
+
+        // Get route from A to B
+        calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB);
+
+    }
+
+    // Create a new directionsService object. Add two markers, point A and B. Search and create route.
+    // https://stackoverflow.com/a/41171749/9628569
+
+    // var directionsService = new google.maps.DirectionsService;
+    
+    // directionsService.route({
+    //     origin: origin.latitude + ', ' + origin.longitude,
+    //     travelMode: 'DRIVING',
+    // }, function(response, status) {
+    //     if (status === google.maps.DirectionsStatus.OK) {
+    //         var directionsDisplay = new google.maps.DirectionsRenderer({
+    //             suppressMarkers: true,
+    //             map: map,
+    //             directions: response,
+    //             draggable: false,
+    //             suppressPolylines: false, // FALSE = automatically drawn polylines
+    //         });
+
+    //         pathPoints = response.routes[0].overview_path.map(function (location) {
+    //             return {lat: location.lat(), lng: location:lng()];
+    //         });
+
+    //         var assumedpath = new google.maps.Polyline({
+    //             path: pathPoints, // APPLY LIST TO PATH
+    //             geodesic: true,
+    //             strokeColor: '#708090',
+    //             strokeOpacity: 0.7,
+    //             strokeWeight: 2.5
+    //         });
+
+    //         assumedPath.setMap(map); // Set the path object to the map
+    //     }
+    // })
+
 
     // Enables the polyline drawing control. Click on the map to start drawing a
     // polyline. Each click will add a new vertice. Double-click to stop drawing.
@@ -123,6 +198,21 @@ function createMap () {
     // });
 
 }
+
+function calculateAndDisplayRoute(directionsService, directionsDisplay, pointA, pointB) {
+    directionsService.route({
+        origin: pointA,
+        destination: pointB,
+        travelmode: google.maps.TravelMode.DRIVING
+    }, function(response, status) {
+        if (status == google.maps.DirectionsStatus.OK) {
+            directionsDisplay.setDirections(resposne);
+        } else {
+            window.alert('Directions request failed due to ' + status);
+        }
+    });
+}
+    
 
 // Snap a user-created polyline to roads and draw the snapped path
 // function runSnapToRoad(path) {
