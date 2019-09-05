@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>My Map</title>
+    <title>MATC - SmartMaps</title>
     <meta name="viewport" content="initial-scale=1.0">
     <meta charset="utf-8">
 
@@ -14,47 +14,71 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col">
-                <h1 class="display-4">My Map</h1>
+                <h1 class="display-4">MATC - SmartMaps</h1>
             </div>
         </div>
-        <div class="row mb-2">
+        <div class="row mb-2 align-items-center">
             <div class="col">
                 <!-- <input class="form-control" id="search" type="text" placeholder="Search..." /> -->
-                <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                    </button>
-                    <a class="navbar-brand" href="#">
-                        <form class="form-inline">
-                            <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
-                        </form>
-                    </a>
-                    <div class="dropdown">
-                        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Directions</button>
-                            <form class="dropdown-menu p-4">
-                            <div class="form-group">
-                                <label for="dropdownFormPointA">From:</label>
-                                <input type="text" class="form-control" id="pointA" placeholder="Set a starting point...">
-                            </div>
-                            <div class="form-group">
-                                <label for="dropdownFormPointB">To:</label>
-                                <input type="text" class="form-control" id="pointB" placeholder="Set a destination point...">
-                            </div>
-                                <button type="submit" class="btn btn-primary">Search</button>
+                <nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+                    <div class="col-2">
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="col-7">
+                        <a class="navbar-brand" href="#">
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2" id="search" type="text" placeholder="Search" aria-label="Search">
                             </form>
-                            </div>
-                    <div class="collapse navbar-collapse" id="navbarText">
-                        <ul class="navbar-nav mr-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Option 2</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Option 3</a>
-                        </li>
-                        </ul>
+                        </a>
+                    </div>
+                    <div class="col">
+                        <div class="dropdown">
+                            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Directions</button>
+                                <form class="dropdown-menu p-4">
+                                    <div class="form-group">
+                                        <label for="dropdownFormPointA">From:</label>
+                                        <input type="text" class="form-control" id="origin-input" placeholder="Set a starting point...">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="dropdownFormPointB">To:</label>
+                                        <input type="text" class="form-control" id="destination-input" placeholder="Set a destination point...">
+                                    </div>
+                                    <div class="form-group">
+                                        <div class="row">
+                                            <div class="col">
+                                                <input type="radio" name="type" id="changemdoe-walking" checked="checked">
+                                                <label for="changemode-walking">Walking</label>
+                                            </div>
+                                            <div class="col">
+                                                <input type="radio" name="type" id="changemode-transit">
+                                                <label for="changemode-transit">Transit</label>    
+                                            </div>
+                                            <div class="col">
+                                                <input type="radio" name="type" id="changemode-driving">
+                                                <label for="changemode-driving">Driving</label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary">Search</button>
+                                </form>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="collapse navbar-collapse" id="navbarText">
+                            <ul class="navbar-nav mr-auto">
+                            <li class="nav-item active">
+                                <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Option 2</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">Option 3</a>
+                            </li>
+                            </ul>
+                        </div>
                     </div>
                 </nav>
             </div>
