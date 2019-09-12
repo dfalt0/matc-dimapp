@@ -148,18 +148,19 @@ var snappedCoordinates = [];
 function initMap() {
     var map = new google.maps.Map(document.getElementById('map'), {
         mapTypeControl: false,
-        center: {lat: -33.8688, lng: 151.2195},
+        center: {lat: 40.8136, lng: -96.7026},
         zoom: 13
     });
 
     new AutoCompleteDirectionsHandler(map);
 }
 
+
 function AutocompleteDirectionsHandler(map) {
     this.map = map;
     this.originPlaceId = null;
     this.destinationPlaceId = null;
-    this.travelMode = 'WALKING';
+    this.travelMode = 'DRIVING';
     this.directionsService = new google.maps.DirectionsService;
     this.directionsRenderer = new google.maps.DirectionsRenderer;
     this.directionsRenderer.setMap(map);
@@ -244,6 +245,7 @@ function AutocompleteDirectionsHandler(map) {
           }
         });
   };
+  
   
 
 // ----------------------------------------------------------------------------------------------------//
