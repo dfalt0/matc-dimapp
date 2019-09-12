@@ -2,12 +2,33 @@
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
     mapTypeControl: false,
-    center: {lat: -33.8688, lng: 151.2195},
-    zoom: 13
+    center: {lat: 40.8136, lng: -96.7026},
+    zoom: 15
   });
 
   new AutocompleteDirectionsHandler(map);
 }
+
+
+
+function SelectMapType(map) {
+    this.map = map;
+    
+    this.setupClickListener('changemapmode-traffic', 'TRAFFIC');
+    
+    var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
+}
+
+SelectMapType.prototype.setupClickListener = function(
+  trafficLayer, mode) {
+    var radioButton = document.getElementById(id);
+    var me = this;
+
+    radioButton.addEventListener('click', function() {
+      me.trafficLayer = mode;
+    })
+  }
 
 /**
  * @constructor

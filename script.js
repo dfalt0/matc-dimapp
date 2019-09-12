@@ -152,9 +152,11 @@ function initMap() {
         zoom: 13
     });
 
+    var trafficLayer = new google.maps.TrafficLayer();
+        trafficLayer.setMap(map);
+
     new AutoCompleteDirectionsHandler(map);
 }
-
 
 function AutocompleteDirectionsHandler(map) {
     this.map = map;
