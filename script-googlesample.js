@@ -1,34 +1,111 @@
+function CoordMapType(tileSize) {
+  this.tileSize = tileSize;
+}
+function TrafficMapType(trafficeSize) {
+  this.tileSize = tileSize;
+}
+
+TrafficMapType.prototype.maxZoom = 19;
+TrafficMapType.prototype.name = 'Traffic';
+TrafficMapType.prototype.alt = 'Traffic Map Type';
+
+TrafficMapType.prototype.getMapTypeId = function(coord, zoom, ownerDocument) {
+  var div = ownerDocument.createElement('div');
+  div.innerHTML = coord;
+  div.style.width = this.tileSize.width + 'px';
+  div.style.height = this.tileSize.height + 'px';
+  div.style.fontSize = '10';
+  div.style.borderStyle = 'solid';
+  div.style.borderWidth = '1px';
+  div.style.borderColor = '#AAAAAA';
+  div.style.backgroundColor = '#E5E3DF';
+  return div;
+}
+
+// function setTrafficLayer() {
+//   var trafficLayer = new google.maps.TrafficLayer();
+//   trafficLayer.setMap(map);
+// };
+
+// function setTransitLayer() {
+//   var transitLayer = new google.maps.TransitLayer();
+//   transitLayer.setMap(map);
+// };
+
+// function setBikeLayer() {
+//   var bikeLayer = new google.maps.BicyclingLayer();
+//   bikeLayer.setMap(map);
+// };
+
+CoordMapType.prototype.maxZoom = 19;
+CoordMapType.prototype.name = 'Tiles';
+CoordMapType.prototype.alt = 'Tile Coordinate Map Type';
+
+CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
+  var div = ownerDocument.createElement('div');
+  div.innerHTML = coord;
+  div.style.width = this.tileSize.width + 'px';
+  div.style.height = this.tileSize.height + 'px';
+  div.style.fontSize = '10';
+  div.style.borderStyle = 'solid';
+  div.style.borderWidth = '1px';
+  div.style.borderColor = '#AAAAAA';
+  div.style.backgroundColor = '#E5E3DF';
+  return div;
+};
+
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
-    mapTypeControl: false,
+    mapTypeControl: true,
+    mapTypeControlOptions: {
+      style: google.maps.MapTypeControlStyle.HORIZONTAL_BAR,
+      position: google.maps.ControlPosition.TOP_LEFT,
+      mapTypeIds: ['roadmap', 'coordinate', 'satellite', 'hybrid', 'terrain', 'traffic']
+    },
+    trafficViewControl: true,
+    trafficViewControlOptions: {
+      position: google.maps.ControlPosition.BOTTOM_LEFT
+    },
+    fullscreenControl: true,
+    fullscreenControlOptions: {
+      position: google.maps.ControlPosition.RIGHT_CENTER
+    },
+    scaleControl: true,
     center: {lat: 40.8136, lng: -96.7026},
     zoom: 15
   });
 
+  var trafficLayer = new google.maps.TrafficLayer();
+  trafficLayer.setMap(map); 
+
+  map.addListener('maptypeid_changed', function() {
+    var showStreetViewControl = map.getMapTypeId() !== 'coordinate';
+    map.setOptions({
+      streetViewControl: showStreetViewControl
+    });
+  });
+
+  map.mapTypes.set('coordinate', 
+    new CoordMapType(new google.maps.Size(256,256)));
+
+
   new AutocompleteDirectionsHandler(map);
+
+  // let c = map.getCenter();
+  // jQuery.cookies.set("center", c.lat() + ','
+  //   + c.lng() + ',' + map.getZoom(),
+  //                       cookieOptions);
+  
+  getCenter(map);
+
 }
 
-
-
-function SelectMapType(map) {
-    this.map = map;
-    
-    this.setupClickListener('changemapmode-traffic', 'TRAFFIC');
-    
-    var trafficLayer = new google.maps.TrafficLayer();
-        trafficLayer.setMap(map);
+function getCenter(map) {
+  console.log('test');
+  let temp = map.getCenter();
+  console.log(temp);
 }
-
-SelectMapType.prototype.setupClickListener = function(
-  trafficLayer, mode) {
-    var radioButton = document.getElementById(id);
-    var me = this;
-
-    radioButton.addEventListener('click', function() {
-      me.trafficLayer = mode;
-    })
-  }
 
 /**
  * @constructor

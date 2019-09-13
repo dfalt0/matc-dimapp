@@ -1,18 +1,29 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>MATC - SmartMaps</title>
+        <title>MATC - Dimapp</title>
         <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
         <link rel="stylesheet" type="text/css" href="style.css" />
         <meta charset="utf-8">
     </head>
     <body>
+        <!-- <div id="map-type">
+                <input type="button" class="btn btn-primary" name="type" id="map-traffic">
+                <label for="map-traffic">Traffic</label>
+
+                <input type="button" class="btn btn-primary" name="type" id="map-transit">
+                <label for="map-transit">Transit</label>
+
+                <input type="button" class="btn btn-primary" name="type" id="map-bike">
+                <label for="map-bike">Bike</label>
+        </div> -->
         <div id="info-window">
-            <div id="cords">Lat: <br />Long: </div>
+            <div id="speed-limit">Speed Limit: </div>
+            <div id="cords">Lat: <span id="lat"></span><br />Long: </div>
             <div id="road-dimension">Width: <br />Length: <br/>Approx. Lane Num: </div>
         </div>
         <div id="watermark">
-                MATC - SmartMaps
+                MATC - Dimapp
         </div>
         <div style="display: none">
             <input id="origin-input" class="controls" type="text" placeholder="Enter an origin location">
@@ -28,14 +39,14 @@
                 <input type="radio" class="btn btn-secondary" name="type" id="changemode-driving" checked="checked">
                 <label for="changemode-driving">Driving</label>
             </div>
-            <div id="map-type-selector" class="map-type">
-                <input type="radio" class="btn btn-secondary" name="type" id="changemapmode-traffic">
-                <label for="changemapmode-traffic">Traffic</label>
-            </div>
         </div>
+        <!-- <div class="control maptype-control">
+            <button class="maptype-control-traffic-map" title="Show Traffic Map">Traffic</button>
+            <button class="maptype-control-transit-map" title="Show Transit Map">Transit</button>
+            <button class="maptype-control-bike-map" title="Show Bike Map">Bicycle</button>
+        </div> -->
 
         <div id="map"></div>
-
 
         <!-- Bootstrap scripts -->
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -46,5 +57,9 @@
         <!-- <script src="script.js"></script> -->
         <script src="script-googlesample.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7LGFloeOgHCn9B6_w0hSfiY5vpErgYhI&libraries=places&callback=initMap" async defer></script>
+        
+        <script type="text/javascript">
+            $('#lat').html('Test');
+        </script>
     </body>
 </html>
