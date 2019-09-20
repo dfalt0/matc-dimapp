@@ -19,7 +19,7 @@
         </div> -->
         <div id="info-window">
             <div id="speed-limit">Speed Limit: </div>
-            <div id="cords">Lat: <span id="lat"></span><br />Long: </div>
+            <div id="cords">Lat: <span id="lat"></span><br />Long: <span id="lng"></span></div>
             <div id="road-dimension">Width: <br />Length: <br/>Approx. Lane Num: </div>
         </div>
         <div id="watermark">
@@ -59,7 +59,8 @@
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7LGFloeOgHCn9B6_w0hSfiY5vpErgYhI&libraries=places&callback=initMap" async defer></script>
         
         <script type="text/javascript">
-            $('#lat').html('Test');
+            $('#lat').html(lat);
+            $('#lng').html(lng);
         </script>
     </body>
 </html>

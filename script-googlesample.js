@@ -54,6 +54,9 @@ CoordMapType.prototype.getTile = function(coord, zoom, ownerDocument) {
   return div;
 };
 
+let lat = 40.8136;
+let lng = -96.7026;
+let latLng = new google.maps.LatLng(lat,lng);
 
 function initMap() {
   var map = new google.maps.Map(document.getElementById('map'), {
@@ -72,12 +75,45 @@ function initMap() {
       position: google.maps.ControlPosition.RIGHT_CENTER
     },
     scaleControl: true,
-    center: {lat: 40.8136, lng: -96.7026},
+    center: {lat, lng},
     zoom: 15
+
+    
   });
 
-  var trafficLayer = new google.maps.TrafficLayer();
-  trafficLayer.setMap(map); 
+  addMarker(latLng, 'Default Marker', map);
+    map.addListener('click', function(event) {
+      addMarker(event.latLng, 'Click marker', map);
+  });
+
+
+  function addMarker(latlng,title,map) {
+    var coords = [];
+    var marker = new google.maps.Marker({
+            position: latlng,
+            map: map,
+            title: title,
+            draggable:true
+    });
+    marker.addListener('drag',function(event) {
+         $('#lat').val(event.latLng.lat())  ;
+        $('#lng').val(event.latLng.lng())  ;
+
+    });
+    marker.addListener('dragend',function(event) {
+        $('#lat').val(event.latLng.lat())  ;
+        $('#lng').val(event.latLng.lng())  ;
+        coords.push(event.latLng.lat());
+        coords.push(event.latLng.lng());
+        $("#results").append('<div>'+JSON.stringify(coords)+'</div>');
+        coords = [];
+    }); 
+    }
+
+  // var trafficLayer = new google.maps.TrafficLayer();
+  // trafficLayer.setMap(map); 
+
+  
 
   map.addListener('maptypeid_changed', function() {
     var showStreetViewControl = map.getMapTypeId() !== 'coordinate';
@@ -199,3 +235,5 @@ AutocompleteDirectionsHandler.prototype.route = function() {
         }
       });
 };
+
+initMap();
