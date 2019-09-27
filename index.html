@@ -18,8 +18,10 @@
                 <label for="map-bike">Bike</label>
         </div> -->
         <div id="info-window">
-            <div id="speed-limit">Speed Limit: </div>
+            <!-- <div>Dimensions At Center</div> -->
             <div id="cords">Lat: <span id="lat"></span><br />Long: <span id="lng"></span></div>
+            <div id="nearest-road">Nearest Road: </div>
+            <div id="speed-limit">Speed Limit: </div>
             <div id="road-dimension">Width: <br />Length: <br/>Approx. Lane Num: </div>
         </div>
         <div id="watermark">
@@ -55,12 +57,9 @@
 
         <!-- Google Maps scripts -->
         <!-- <script src="script.js"></script> -->
-        <script src="script-googlesample.js"></script>
+        <!-- <script src="script-googlesample.js"></script> -->
+        <script src="script-center.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB7LGFloeOgHCn9B6_w0hSfiY5vpErgYhI&libraries=places&callback=initMap" async defer></script>
         
-        <script type="text/javascript">
-            $('#lat').html(lat);
-            $('#lng').html(lng);
-        </script>
     </body>
 </html>
